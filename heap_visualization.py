@@ -50,19 +50,25 @@ def draw_tree(tree_root):
 # root.left.right = Node(10)
 # root.right = Node(1)
 # root.right.left = Node(3)
-if __name__ == '__main__':
+
+def generate_random_heap(length = 30):
     heap_list = []
     
-    for _ in range(30):
+    for _ in range(0, length):
         heap_list.append(random.randint(0, 100))
-    
+        
     heapq.heapify(heap_list)
-    root = Node(heap_list[0])
+    return heap_list
+
+
+def generate_heap_tree(heap: list) -> Node:
+    root = Node(heap[0])
     dict_nodes = {0: root}
-    length = len(heap_list)
-    for i in range(0, (length - 2) // 2):
-        node_left = None if (2 * i + 1) >= (length - 1) else Node(heap_list[2 * i + 1]) 
-        node_right = None if (2 * i + 2) >= (length - 1) else Node(heap_list[2 * i + 2])
+    length = len(heap)
+    
+    for i in range(0, length // 2):
+        node_left = None if (2 * i + 1) > (length - 1) else Node(heap[2 * i + 1]) 
+        node_right = None if (2 * i + 2) > (length - 1) else Node(heap[2 * i + 2])
         current_node = dict_nodes.get(i)
         current_node.left = node_left
         current_node.right = node_right
@@ -70,6 +76,15 @@ if __name__ == '__main__':
             dict_nodes[(2 * i + 1)] = node_left
         if node_right is not None:   
             dict_nodes[(2 * i + 2)] = node_right
+            
+    return root
 
-# Відображення дерева
-draw_tree(root)
+
+
+if __name__ == '__main__':
+    
+    heap = generate_random_heap(40)
+    root = generate_heap_tree(heap)
+
+    # Відображення дерева
+    draw_tree(root)
