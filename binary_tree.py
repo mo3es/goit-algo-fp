@@ -50,9 +50,7 @@ if __name__ == '__main__':
 
     build_binary_tree(length, degree, delta, deep)
 
-    print("\nTree coordinates generated!")
     # print(tree_coordinates) # Тестове виведення списку координат, за необхідності виведення треба розкоментувати на початку строки
-
 
     fig, ax = plt.subplots(figsize=(10, 10)) 
 
