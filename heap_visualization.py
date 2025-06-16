@@ -6,12 +6,24 @@ import matplotlib.pyplot as plt
 
 
 class Node:
-  def __init__(self, key, color="skyblue"):
+  def __init__(self, key, color_to_set=(0.0, 0.0, 0.3)):
     self.left = None
     self.right = None
     self.val = key
-    self.color = color # Додатковий аргумент для зберігання кольору вузла
+    self.color = color_to_set # Додатковий аргумент для зберігання кольору вузла
     self.id = str(uuid.uuid4()) # Унікальний ідентифікатор для кожного вузла
+
+
+  def set_color(self, new_color):
+    
+        if isinstance(new_color, tuple) and len(new_color) == 3 and all(0.0 <= c <= 1.0 for c in new_color):
+            self.color = new_color
+        else:
+            print(f"Невірний формат кольору: {new_color}")
+
+
+  def get_color(self):
+        return self._visual_color
 
 
 def add_edges(graph, node, pos, x=0, y=0, layer=1):
